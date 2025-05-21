@@ -9,7 +9,7 @@ xsd:		http://www.w3.org/2001/XMLSchema#
 foaf:		http://xmlns.com/foaf/0.1/
 obda:		https://w3id.org/obda/vocabulary#
 rdfs:		http://www.w3.org/2000/01/rdf-schema#
-limit_1:    https://environment.ld.admin.ch/foen/test_target/
+limit:      https://environment.ld.admin.ch/foen/test_target/cube/target_1/1/
 meta:       https://cube.link/meta/
 qudt:       http://qudt.org/schema/qudt/
 schema:     http://schema.org/
@@ -22,27 +22,43 @@ foen:       https://environment.ld.admin.ch/foen/
 
 
 [MappingDeclaration] @collection [[
-mappingId	observation
-target		limit_1:cube/target_1/1/observation/{jahr}_{energietraeger} a cube:Observation; limit_1:year <https://ld.admin.ch/time/year/{jahr}>; limit_1:energySource foen:energysource/{energietraeger}; limit_1:roundedCO2Emissions "{gerundet}"^^xsd:float . 
-source		SELECT * FROM "public"."co2data"
-
 mappingId   cubeCube
-target      limit_1:cube/{identifier}/1 dct:identifier "{identifier}" ; schema:name "{name_de}"@de, "{name_fr}"@fr, "{name_it}"@it, "{name_en}"@en; schema:description "{descriptions}"@de; cube:observationSet limit_1:cube/{identifier}/1/observationSet; cube:observationConstraint limit_1:cube/{identifier}/1/shape .
+target      limit: dct:identifier "{identifier}" ; schema:name "{name_de}"@de, "{name_fr}"@fr, "{name_it}"@it, "{name_en}"@en; schema:description "{descriptions}"@de; cube:observationSet limit:observationSet; cube:observationConstraint limit:shape .
 source      SELECT * FROM "public"."cube_table"
 
 mappingId   cubeObsset
-target      limit_1:cube/target_1/1/observationSet cube:observation limit_1:cube/target_1/1/observation/{jahr}_{energietraeger} .
+target      limit:observationSet a cube:ObservationSet ; cube:observation limit:observation/{jahr}_{energietraeger} .
 source      SELECT * FROM "public"."co2data"
 
-mappingId   shapeBase
-target      limit_1:cube/target_1/1/shape a cube:ObservationConstraint; sh:property _:{id} . _:{id} schema:name "{name_de}"@de , "{name_fr}"@fr, "{name_it}"@it, "{name_en}"@en ; sh:path limit_1:{predicate_path}.
+mappingId	observation
+target		limit:observation/{jahr}_{energietraeger} a cube:Observation; limit:year <https://ld.admin.ch/time/year/{jahr}>; limit:energySource foen:energysource/{energietraeger}; limit:roundedCO2Emissions "{gerundet}"^^xsd:float . 
+source		SELECT * FROM "public"."co2data"
+
+mappingId   shapeNameAndPath
+target      limit:shape a cube:ObservationConstraint; sh:property _:{id} . _:{id} schema:name "{name_de}"@de , "{name_fr}"@fr, "{name_it}"@it, "{name_en}"@en ; sh:path limit:{predicate_path}.
 source      SELECT * FROM "public"."shape_table"
 
-mappingId   cubeObsset
-target      limit_1:cube/target_1/1/observationSet cube:observation limit_1:cube/target_1/1/observation/{jahr}_{energietraeger} .
-source      SELECT jahr, energietraeger FROM "public"."co2data" 
+mappingId   shapeDescDe
+target      _:{id} schema:description "{description_de}"@de .
+source      SELECT description_de "public"."shape_table" WHERE description_de IS NOT NULL
 
-mappingId   shapeDimKey
+mappingId   shapeDescFr
+target      _:{id} schema:description "{description_fr}"@fr .
+source      SELECT description_fr "public"."shape_table" WHERE description_fr IS NOT NULL
+
+mappingId   shapeDescIt
+target      _:{id} schema:description "{description_it}"@it .
+source      SELECT description_it "public"."shape_table" WHERE description_it IS NOT NULL
+
+mappingId   shapeDescEn
+target      _:{id} schema:description "{description_en}"@en .
+source      SELECT description_en "public"."shape_table" WHERE description_en IS NOT NULL
+
+mappingId   shapeKeyDim
 target      _:{id} a cube:KeyDimension .
-source      SELECT id, dim_type FROM "public"."shape_table" WHERE dim_type = 'key'
+source      SELECT id, dim_type FROM "public"."shape_table" WHERE dim_type = 'Key Dimension'
+
+mappingId   shapeMeasureDim
+target      _:{id} a cube:MeasureDimension .
+source      select id, dim_type FROM "public"."shape_table" WHERE dim_type = 'Measure Dimension'
 ]]
