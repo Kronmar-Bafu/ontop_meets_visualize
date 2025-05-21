@@ -1,0 +1,47 @@
+@prefix cube: <https://cube.link/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix limit_1: <https://environment.ld.admin.ch/foen/test_target/> .
+@prefix meta: <https://cube.link/meta/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+
+
+<https://environment.ld.admin.ch/foen/test_target/cube/target_1/1> a void:Dataset,
+        schema:Dataset,
+        dcat:Dataset,
+        cube:Cube .
+<https://environment.ld.admin.ch/foen/test_target/cube/target_1/1>
+    dct:accrualPeriodicity <http://publications.europe.eu/resource/authority/frequency/ANNUAL> ;
+    dct:creator <https://register.ld.admin.ch/opendataswiss/org/bundesamt-fur-umwelt-bafu> ;
+    dct:identifier "target_1" ;
+    schema:contactPoint [ a schema:ContactPoint ;
+            schema:email "marco.kronenberg@bafu.admin.ch"^^<http://www.w3.org/2001/XMLSchema#string> ;
+            schema:name "Bundesamt für Umwelt"^^<http://www.w3.org/2001/XMLSchema#string> ] ;
+    schema:contributor <https://register.ld.admin.ch/opendataswiss/org/bundesamt-fur-umwelt-bafu> ;
+    schema:creativeWorkStatus <https://ld.admin.ch/vocabulary/CreativeWorkStatus/Draft> ;
+    schema:creator <https://register.ld.admin.ch/opendataswiss/org/bundesamt-fur-umwelt-bafu> ;
+    schema:dateCreated "2024-11-26"^^<http://www.w3.org/2001/XMLSchema#date> ;
+    schema:dateModified "2025-02-20T14:17:57+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+    schema:datePublished "2025-02-20"^^<http://www.w3.org/2001/XMLSchema#date> ;
+    schema:description "Ein Beispiel Cube mit einem Zielwert"@de,
+        "An example Cube with a target value"@en,
+        "Un exemple de Cube avec une valeur cible"@fr,
+        "Un esempio di Cube con un valore obiettivo"@it ;
+    schema:name "CO2-Emissionen nach Energieträger"@de,
+        "CO2 Emissions per energy source"@en,
+        "CO2-Emissions par source d'energie"@fr,
+        "Emissioni di CO2 per fonte di energia"@it ;
+    schema:publisher <https://register.ld.admin.ch/opendataswiss/org/bundesamt-fur-umwelt-bafu> ;
+    schema:version 1 ;
+    schema:workExample <https://ld.admin.ch/application/visualize> ;
+    dcat:contactPoint [ a vcard:Organization ;
+            vcard:fn "Bundesamt für Umwelt"^^<http://www.w3.org/2001/XMLSchema#string> ;
+            vcard:hasEmail "marco.kronenberg@bafu.admin.ch"^^<http://www.w3.org/2001/XMLSchema#string> ] ;
+    cube:observationConstraint <https://environment.ld.admin.ch/foen/test_target/cube/target_1/1/shape> ;
+    cube:observationSet <https://environment.ld.admin.ch/foen/test_target/cube/target_1/1/ObservationSet> .

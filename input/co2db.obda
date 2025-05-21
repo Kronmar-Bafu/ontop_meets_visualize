@@ -1,0 +1,48 @@
+[PrefixDeclaration]
+cube:       https://cube.link/
+dcat:       http://www.w3.org/ns/dcat#
+dct:        http://purl.org/dc/terms/
+owl:		http://www.w3.org/2002/07/owl#
+rdf:		http://www.w3.org/1999/02/22-rdf-syntax-ns#
+xml:		http://www.w3.org/XML/1998/namespace
+xsd:		http://www.w3.org/2001/XMLSchema#
+foaf:		http://xmlns.com/foaf/0.1/
+obda:		https://w3id.org/obda/vocabulary#
+rdfs:		http://www.w3.org/2000/01/rdf-schema#
+limit_1:    https://environment.ld.admin.ch/foen/test_target/
+meta:       https://cube.link/meta/
+qudt:       http://qudt.org/schema/qudt/
+schema:     http://schema.org/
+sh:         http://www.w3.org/ns/shacl#
+time:       http://www.w3.org/2006/time#
+unit:       http://qudt.org/vocab/unit/
+vcard:      http://www.w3.org/2006/vcard/ns#
+void:       http://rdfs.org/ns/void#
+foen:       https://environment.ld.admin.ch/foen/
+
+
+[MappingDeclaration] @collection [[
+mappingId	observation
+target		limit_1:cube/target_1/1/observation/{jahr}_{energietraeger} a cube:Observation; limit_1:year <https://ld.admin.ch/time/year/{jahr}>; limit_1:energySource foen:energysource/{energietraeger}; limit_1:roundedCO2Emissions "{gerundet}"^^xsd:float . 
+source		SELECT * FROM "public"."co2data"
+
+mappingId   cubeCube
+target      limit_1:cube/{identifier}/1 dct:identifier "{identifier}" ; schema:name "{name_de}"@de, "{name_fr}"@fr, "{name_it}"@it, "{name_en}"@en; schema:description "{descriptions}"@de; cube:observationSet limit_1:cube/{identifier}/1/observationSet; cube:observationConstraint limit_1:cube/{identifier}/1/shape .
+source      SELECT * FROM "public"."cube_table"
+
+mappingId   cubeObsset
+target      limit_1:cube/target_1/1/observationSet cube:observation limit_1:cube/target_1/1/observation/{jahr}_{energietraeger} .
+source      SELECT * FROM "public"."co2data"
+
+mappingId   shapeBase
+target      limit_1:cube/target_1/1/shape a cube:ObservationConstraint; sh:property _:{id} . _:{id} schema:name "{name_de}"@de , "{name_fr}"@fr, "{name_it}"@it, "{name_en}"@en ; sh:path limit_1:{predicate_path}.
+source      SELECT * FROM "public"."shape_table"
+
+mappingId   cubeObsset
+target      limit_1:cube/target_1/1/observationSet cube:observation limit_1:cube/target_1/1/observation/{jahr}_{energietraeger} .
+source      SELECT jahr, energietraeger FROM "public"."co2data" 
+
+mappingId   shapeDimKey
+target      _:{id} a cube:KeyDimension .
+source      SELECT id, dim_type FROM "public"."shape_table" WHERE dim_type = 'key'
+]]

@@ -1,0 +1,2 @@
+id, name_de, name_fr, name_it, name_en, descriptions, predicate_path,dim_type,data_type
+1,Energieträger,Source d'energie,Sorca di energi,Source of Energy,Energieträger der für die Erzeugung verwendet wurde,energySource,key,iri
