@@ -28,20 +28,20 @@ FROM '/docker-entrypoint-initdb.d/cube.csv'
 DELIMITER ','
 CSV HEADER;
 
--- Create a third table for metadata shape
-CREATE TABLE shape_table (
-    id INTEGER,
-    name_de text,
-    name_fr text,
-    name_it text,
-    name_en text,
-    descriptions text,
-    predicate_path text,
-    dim_type text,
-    data_type text
-);
+-- -- Create a third table for metadata shape
+-- CREATE TABLE shape_table (
+--     id INTEGER,
+--     name_de text,
+--     name_fr text,
+--     name_it text,
+--     name_en text,
+--     descriptions text,
+--     predicate_path text,
+--     dim_type text,
+--     data_type text
+-- );
 
-COPY shape_table(id, name_de, name_fr, name_it, name_en, descriptions, predicate_path, dim_type, data_type)
-FROM '/docker-entrypoint-initdb.d/shape.csv'
-DELIMITER ','
-CSV HEADER;
+-- COPY shape_table(id, name_de, name_fr, name_it, name_en, descriptions, predicate_path, dim_type, data_type)
+-- FROM '/docker-entrypoint-initdb.d/shape.csv'
+-- DELIMITER ','
+-- CSV HEADER;

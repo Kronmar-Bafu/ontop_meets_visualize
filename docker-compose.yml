@@ -14,13 +14,13 @@ services:
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
       - ./db/data.csv:/docker-entrypoint-initdb.d/data.csv
       - ./db/cube.csv:/docker-entrypoint-initdb.d/cube.csv
-      - ./db/shape.csv:/docker-entrypoint-initdb.d/shape.csv
+      - ./db/shape.sql:/docker-entrypoint-initdb.d/shape.sql
 
 
   ontop:
     image: ontop/ontop
     environment:
-      ONTOP_ONTOLOGY_FILE: /opt/ontop/input/co2db.cube.ttl
+      #ONTOP_ONTOLOGY_FILE: /opt/ontop/input/co2db.cube.ttl
       ONTOP_MAPPING_FILE: /opt/ontop/input/co2db.obda
       ONTOP_PROPERTIES_FILE: /opt/ontop/input/co2db.compose.properties
       #ONTOP_PORTAL_FILE: /opt/ontop/input/university-complete.portal.toml
