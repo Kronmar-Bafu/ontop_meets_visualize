@@ -1,0 +1,12 @@
+FROM ontop/ontop
+
+# Copy your config and JDBC driver into the image
+COPY mapping.obda /opt/ontop/
+COPY ontop.properties /opt/ontop/
+COPY AthenaJDBC42-2.0.35.1000.jar /opt/ontop/athena-driver.jar
+
+# Add JDBC driver to the classpath
+ENV CLASSPATH=/opt/ontop/athena-driver.jar
+
+# Start Ontop endpoint
+CMD ["ontop", "endpoint", "--mapping=/opt/ontop/your_mappings.obda", "--properties=/opt/ontop/ontop.properties"]

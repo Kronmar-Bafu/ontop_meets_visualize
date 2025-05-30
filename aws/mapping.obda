@@ -1,0 +1,28 @@
+[PrefixDeclaration]
+cube:       https://cube.link/
+dcat:       http://www.w3.org/ns/dcat#
+dct:        http://purl.org/dc/terms/
+owl:		http://www.w3.org/2002/07/owl#
+rdf:		http://www.w3.org/1999/02/22-rdf-syntax-ns#
+xml:		http://www.w3.org/XML/1998/namespace
+xsd:		http://www.w3.org/2001/XMLSchema#
+foaf:		http://xmlns.com/foaf/0.1/
+obda:		https://w3id.org/obda/vocabulary#
+rdfs:		http://www.w3.org/2000/01/rdf-schema#
+limit:      https://environment.ld.admin.ch/foen/test_target/cube/target_1/1/
+meta:       https://cube.link/meta/
+qudt:       http://qudt.org/schema/qudt/
+schema:     http://schema.org/
+sh:         http://www.w3.org/ns/shacl#
+time:       http://www.w3.org/2006/time#
+unit:       http://qudt.org/vocab/unit/
+vcard:      http://www.w3.org/2006/vcard/ns#
+void:       http://rdfs.org/ns/void#
+foen:       https://environment.ld.admin.ch/foen/
+
+
+[MappingDeclaration] @collection [[
+mappingId   observation
+target      limit:observation/{jahr}_{energietraeger} a cube:Observation; limit:year "{jahr}"^^xsd:gYear; limit:energySource foen:energysource/{energietraeger}; limit:roundedCO2Emissions "{gerundet}"^^xsd:float . 
+source      SELECT * FROM "AwsDataCatalog"."ontop-test-db"."ontop_test"
+]]
